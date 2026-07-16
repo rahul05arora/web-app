@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, View, FlatList, SafeAreaView, ActivityIndicator, RefreshControl } from 'react-native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../types';
+import { API_BASE_URL } from './config';
 
 type DashboardProps = NativeStackScreenProps<RootStackParamList, 'Dashboard'>;
 
@@ -21,7 +22,7 @@ export default function DashboardScreen({ route }: DashboardProps) {
 
   const fetchTransactions = async () => {
     try {
-      const response = await fetch('http://localhost:5000/api/transactions', {
+      const response = await fetch(`${API_BASE_URL}/api/transactions`, {
         headers: { 'Authorization': `Bearer ${token}` } // Send JWT down the wire safely
       });
       const data = await response.json();
